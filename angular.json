@@ -10,30 +10,30 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "app/ui",
+      "sourceRoot": "app/ui/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/compai-init",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
+            "index": "app/ui/src/index.html",
+            "browser": "app/ui/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "app/ui/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "app/ui/src/favicon.ico",
+              "app/ui/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "app/ui/src/styles.scss"
             ],
             "scripts": [],
-            "server": "src/main.server.ts",
+            "server": "app/ui/src/main.server.ts",
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
@@ -88,19 +88,22 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "tsconfig.spec.json",
+            "tsConfig": "app/ui/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "app/ui/src/favicon.ico",
+              "app/ui/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "app/ui/src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2712e77d-ceb4-4069-84ca-0d474c5602cc"
   }
 }

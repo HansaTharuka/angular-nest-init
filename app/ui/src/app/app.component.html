@@ -1,11 +1,31 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div style="padding: 20px; font-family: Arial, sans-serif;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <h1>CompAI Application</h1>
+    <p>Welcome to CompAI - A multimodule Angular + NestJS application</p>
+
+    <div style="margin-top: 30px; padding: 20px; background-color: #f5f5f5; border-radius: 8px;">
+      <h2>Data Export</h2>
+      <p>Click the button below to download table data as CSV</p>
+      <button
+        (click)="downloadCsv()"
+        [disabled]="isLoading"
+        style="
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: bold;
+        "
+      >
+        {{ isLoading ? 'Downloading...' : 'Download CSV' }}
+      </button>
+    </div>
+  </div>
+</div>
+
 
 <style>
   :host {

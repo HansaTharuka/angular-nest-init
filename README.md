@@ -1,27 +1,66 @@
 # CompaiInit
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+This project contains a split Angular frontend and NestJS backend in the same repository.
 
-## Development server
+- Frontend code: `app/ui`
+- Backend code: `app/api`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Run the frontend
 
-## Code scaffolding
+From the project root:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm run start:frontend
+```
+
+This starts the Angular dev server, usually on `http://localhost:4200/`.
+
+## Run the backend
+
+From the project root:
+
+```bash
+npm run start:backend
+```
+
+This starts the NestJS backend, usually on `http://localhost:3000/api`.
+
+## Run both together
+
+From the project root:
+
+```bash
+npm run start:dev
+```
+
+This starts both frontend and backend concurrently.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Frontend build:
 
-## Running unit tests
+```bash
+npm run build:frontend
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Backend build:
 
-## Running end-to-end tests
+```bash
+npm run build:backend
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Frontend structure
+
+- `app/ui/src/` — Angular application source
+- `app/ui/server.ts` — Angular SSR server entry
+- `app/ui/tsconfig.app.json` — Angular app TypeScript config
+
+## Backend structure
+
+- `app/api/src/` — NestJS application source
+- `app/api/tsconfig.json` — NestJS TypeScript config
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For Angular CLI help, run `ng help`.
+For NestJS help, run `npx nest --help`.
