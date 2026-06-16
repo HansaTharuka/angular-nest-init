@@ -1,0 +1,17 @@
+<template id="template2">
+  <title>Salary Summary Report</title>
+  <meta>
+    <item key="COMPONENT">Total Compensation</item>
+    <item key="CURRENCY">USD</item>
+  </meta>
+  <columns>
+    <column key="employee">Employee</column>
+    <column key="role">Role</column>
+    <column key="base">Base Salary</column>
+    <column key="bonus">Bonus</column>
+    <column key="total">Total Compensation</column>
+  </columns>
+  <notes>
+    <line>Summary of base and variable compensation by employee and role.</line>
+  </notes>
+</template>

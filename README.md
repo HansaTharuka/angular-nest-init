@@ -68,6 +68,7 @@ Swagger UI available at: `http://localhost:3000/api/docs`
 ### Authentication
 
 **Login (public endpoint):**
+
 ```
 POST /api/auth/login
 Content-Type: application/json
@@ -84,6 +85,7 @@ Response:
 ```
 
 **Use token for protected endpoints:**
+
 ```
 Authorization: Bearer <access_token>
 ```
@@ -100,18 +102,18 @@ Response:
 }
 ```
 
-### CSV Export (requires auth)
+### Excel Export (requires auth)
 
 ```
-POST /api/export/csv
+POST /api/export/xlsx
 Authorization: Bearer <token>
 Content-Type: application/json
 
 {
-  "tableName": "stock_data"
+  "tableName": "market_pricing"
 }
 
-Response: CSV file as blob (file download)
+Response: Excel `.xlsx` file as blob (file download)
 ```
 
 ## Logging Architecture
@@ -119,17 +121,20 @@ Response: CSV file as blob (file download)
 ### Correlation ID Middleware
 
 Every request gets a unique correlation ID for tracing:
+
 - Auto-generated if not provided via `X-Correlation-ID` header
 - Included in all log entries
 - Returned in response headers
 
 **Request:**
+
 ```http
-POST /api/export/csv
+POST /api/export/xlsx
 X-Correlation-ID: 550e8400-e29b-41d4-a716-446655440000
 ```
 
 **Response Headers:**
+
 ```http
 X-Correlation-ID: 550e8400-e29b-41d4-a716-446655440000
 ```
@@ -137,6 +142,7 @@ X-Correlation-ID: 550e8400-e29b-41d4-a716-446655440000
 ### JSON Logging
 
 All logs are JSON formatted with fields:
+
 - `timestamp` — ISO timestamp
 - `level` — info, warn, error, debug
 - `message` — Log message
@@ -145,6 +151,7 @@ All logs are JSON formatted with fields:
 - `service` — compai-api
 
 **Log Output:**
+
 ```json
 {
   "level": "info",
@@ -159,22 +166,23 @@ All logs are JSON formatted with fields:
 ```
 
 Log files:
+
 - `logs/application-YYYY-MM-DD.log` — All logs
 - `logs/error-YYYY-MM-DD.log` — Error logs only
 - Daily rotation with 14-day retention
 
-## CSV Export & Blob Stream Design
+## Excel Export & Blob Stream Design
 
 ### Frontend Flow
 
 ```
-User clicks "Download CSV"
+User clicks "Download Excel"
     ↓
-AppComponent.downloadCsv()
+AppComponent.downloadExcel()
     ↓
-ExportService.exportTableToCsv(tableName: "stock_data")
+ExportService.exportTableToExcel(tableName: "market_pricing")
     ↓
-HTTP POST /api/export/csv
+HTTP POST /api/export/xlsx
     ↓
 HttpClient receives response with responseType: 'blob'
     ↓
@@ -192,19 +200,19 @@ window.URL.revokeObjectURL(url) → Free memory
 ### Backend Flow
 
 ```
-POST /api/export/csv received
+POST /api/export/xlsx received
     ↓
-ExportController.exportCsv(tableName)
+ExportController.exportXlsx(tableName)
     ↓
-ExportService.generateCsv() generates CSV string
+ExportService.generateExcel() generates templated Excel workbook
     ↓
 Set HTTP Response Headers:
-  - Content-Type: text/csv; charset=utf-8
-  - Content-Disposition: attachment; filename="..."
+  - Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  - Content-Disposition: attachment; filename="... .xlsx"
     ↓
-Send CSV string in response body
+Send XLSX workbook buffer in response body
     ↓
-HTTP layer converts string to binary stream
+HTTP layer sends binary stream
     ↓
 Frontend receives as Blob
 ```
@@ -212,18 +220,21 @@ Frontend receives as Blob
 ### What is a Blob?
 
 A **Blob** (Binary Large Object) is:
+
 - Browser API for handling binary/file data
 - Immutable and cannot be modified after creation
 - Can represent any file type (CSV, PDF, images, videos, etc.)
 - Stored in browser memory
 
 **Current Design:**
+
 - ✅ Simple and straightforward
 - ✅ Good for small-medium files (up to ~50MB)
 - ✅ No file stored on server (stateless)
 - ✅ Browser handles download natively
 
 **Stream vs Blob:**
+
 - **Blob (current):** Entire response collected in memory
 - **Stream (advanced):** Data flows continuously, memory efficient for large files (100MB+)
 
@@ -247,13 +258,14 @@ PORT=3000
 JWT_SECRET=your-secret-key-change-in-production
 NODE_ENV=development
 
-# Frontend  
+# Frontend
 ANGULAR_API_URL=http://localhost:3000/api
 ```
 
 ## Dependencies
 
 **Backend:**
+
 - `@nestjs/*` — NestJS framework
 - `@nestjs/jwt` — JWT authentication
 - `@nestjs/passport` — Passport strategies
@@ -262,6 +274,7 @@ ANGULAR_API_URL=http://localhost:3000/api
 - `passport-jwt` — JWT strategy
 
 **Frontend:**
+
 - `@angular/*` — Angular framework
 - `@angular/router` — Routing
 - `rxjs` — Reactive programming

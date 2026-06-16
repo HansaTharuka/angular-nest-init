@@ -1,0 +1,26 @@
+<template id="template1">
+  <title>Market Pricing • 2025 Bulgaria TRS</title>
+  <meta>
+    <item key="WEIGHTING">Incumbent Weighted</item>
+    <item key="EFFECTIVE DATE">03/01/2025</item>
+    <item key="AGEING">Aged to May 2026</item>
+    <item key="ACTUAL">Actual Data</item>
+    <item key="COMPONENT">Base Salary</item>
+    <item key="CURRENCY">USD</item>
+    <item key="REFINEMENTS">Location: New York, PC Range: 56</item>
+  </meta>
+
+  <columns>
+    <column key="jobTitle">JOB TITLE</column>
+    <column key="p25">25TH</column>
+    <column key="mean">MEAN</column>
+    <column key="median">MEDIAN</column>
+    <column key="p75">75TH</column>
+  </columns>
+
+  <notes>
+    <line>* One or more organizations have contributed a proportion of incumbents that may create a dominating influence.</line>
+    <line>** Percentiles are suppressed in this analysis due to a dominating influence of one organization. Mercer suggests creating 'Organization Weighted' results to eliminate any dominating influences.</line>
+    <line>The employee's salary is positioned slightly above the market median for DevOps Manager (M3) roles and falls within the competitive 50th–75th percentile range based on Mercer benchmarks.</line>
+  </notes>
+</template>

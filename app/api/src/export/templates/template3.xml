@@ -1,0 +1,18 @@
+<template id="template3">
+  <title>Stock Data Extract</title>
+  <meta>
+    <item key="SOURCE">Stock API</item>
+    <item key="RANGE">Last 30 days</item>
+  </meta>
+  <columns>
+    <column key="date">Date</column>
+    <column key="open">Open</column>
+    <column key="high">High</column>
+    <column key="low">Low</column>
+    <column key="close">Close</column>
+    <column key="volume">Volume</column>
+  </columns>
+  <notes>
+    <line>Daily OHLC and volume for selected instruments.</line>
+  </notes>
+</template>

@@ -10,8 +10,14 @@ export class ExportService {
 
   constructor(private http: HttpClient) {}
 
-  exportTableToCsv(tableName: string): Observable<Blob> {
-    return this.http.post(`${this.apiUrl}/csv`, { tableName }, {
+  exportTableToExcel(tableName: string): Observable<Blob> {
+    return this.http.post(`${this.apiUrl}/xlsx`, { tableName }, {
+      responseType: 'blob',
+    });
+  }
+
+  exportTemplate(tableName: string, templateId: string): Observable<Blob> {
+    return this.http.post(`${this.apiUrl}/template`, { tableName, templateId }, {
       responseType: 'blob',
     });
   }

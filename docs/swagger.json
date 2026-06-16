@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "AppController_getHealth",
+        "summary": "Health check endpoint",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "API is healthy"
+          }
+        },
+        "tags": [
+          "app"
+        ]
+      }
+    },
+    "/api/v1": {
+      "get": {
+        "operationId": "AppController_getRoot",
+        "summary": "Get root message (requires authentication)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns hello message"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "tags": [
+          "app"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/v1/hello": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "summary": "Get hello message (requires authentication)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns hello message"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "tags": [
+          "app"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "summary": "Login to get JWT token",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "example": "user123"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "john"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns JWT access token"
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/export/xlsx": {
+      "post": {
+        "operationId": "ExportController_exportXlsx",
+        "summary": "Export table data as Excel (XLSX)",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tableName": {
+                    "type": "string",
+                    "example": "market_pricing"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Excel file data"
+          }
+        },
+        "tags": [
+          "export"
+        ]
+      }
+    },
+    "/api/export/template": {
+      "post": {
+        "operationId": "ExportController_exportByTemplate",
+        "summary": "Export using a named template (templateId + tableName)",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tableName": {
+                    "type": "string",
+                    "example": "market_pricing"
+                  },
+                  "templateId": {
+                    "type": "string",
+                    "example": "template1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Excel file data (templated)"
+          }
+        },
+        "tags": [
+          "export"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "CompAI API",
+    "description": "CompAI Backend API Documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "JWT": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {}
+  }
+}
